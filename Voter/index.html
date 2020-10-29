@@ -17,101 +17,99 @@
                 <div class="col-8 offset-2">
                     <div class="card mt-5">
                         <div class="card-header">
-                            <h2 class="card-title">Stimme jetzt ab!</h2>
-                        
+                            <h2 class="card-title">
+                                Stimme jetzt ab!
+                            </h2>
                         </div>
                         <div class="card-body">
+                            <div class="media my-3" v-for="entry in sortedEntries">
+                                <img v-bind:src=" entry.image" class="mr-3">
+                                <div class="media-body">
+                                    <h5>
+                                        {{ entry.title}}
+                                        <span class="float-right text-primary" style="cursor: pointer;"
+                                            v-on:click="upvote(entry.id)">
+                                            <i class="fa fa-chevron-up"></i><strong> {{ entry.votes}}</strong>
+                                        </span>
+                                    </h5>
+                                    <div>
+                                        {{ entry.desc}}
+                                    </div>
+                                    <small class="text-muted">Eingereicht von {{ entry.author}}</small>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        const entries = [
-            {
-                id: 1,
-                title: 'Spaghetti Bolognese',
-                desc: 'Ein Nudelgericht mit Hackfleisch-Sosse',
-                votes: 16,
-                author: 'Italien',
-                image: "https://via.placeholder.com/64"
-            },
-            {
-                id: 2,
-                title: 'Wiener Schnitzel',
-                desc: 'Ein dünnes Schnitzel aus Kalbfleisch',
-                votes: 5,
-                author: 'Österreich',
-                image: "https://via.placeholder.com/64"
-            },
-            {
-                id: 3,
-                title: 'Peking-Ente',
-                desc: 'Das kaiserliche Gericht',
-                votes: 20,
-                author: 'China',
-                image: "https://via.placeholder.com/64"
-            },
-            {
-                id: 4,
-                title: 'Gulasch',
-                desc: 'Ein traditionelles Ragout',
-                votes: 24,
-                author: 'Ungarn',
-                image: "https://via.placeholder.com/64"
-            },
-        ];
-    </script>
-    <script src="https://unpkg.com/vue"> </script>
-    <script>
-        Vue.component('entry-component', {
-            template:
-            `
-            <div class="media my-3"
-                v-for="entry in sortedEntries"
-            >
-                <img v-bind:src=" entry.image" class="mr-3">
-                <div class="media-body">
-                    <h5>
-                        {{ entry.title}}
-                        <span 
-                            class="float-right text-primary"
-                            style="cursor: pointer;"
-                            v-on:click="upvote(entry.id)"
-                        >
-                            <i class="fa fa-chevron-up"></i><strong> {{ entry.votes}}</strong>
-                        </span>
-                    </h5>
-                    <div>
-                        {{ entry.desc}}
-                    </div>
-                    <small class="text-muted">Eingereicht von {{ entry.author}}</small>
-                </div>
-            </div>
-            `
-        });
-        
-        new Vue({
-            el: '#app',
-            data: {
-                entries: entries
-            },
-            computed: {
-                sortedEntries(){
-                    return this.entries.sort((a,b) => {
-                        return b.votes - a.votes
-                    });
+
+        <script>
+            const entries = [
+                {
+                    id: 1,
+                    title: 'Spaghetti Bolognese',
+                    desc: 'Ein Nudelgericht mit Hackfleisch-Sosse',
+                    votes: 16,
+                    author: 'Italien',
+                    image: "https://via.placeholder.com/64"
+                },
+                {
+                    id: 2,
+                    title: 'Wiener Schnitzel',
+                    desc: 'Ein dünnes Schnitzel aus Kalbfleisch',
+                    votes: 5,
+                    author: 'Österreich',
+                    image: "https://via.placeholder.com/64"
+                },
+                {
+                    id: 3,
+                    title: 'Peking-Ente',
+                    desc: 'Das kaiserliche Gericht',
+                    votes: 20,
+                    author: 'China',
+                    image: "https://via.placeholder.com/64"
+                },
+                {
+                    id: 4,
+                    title: 'Gulasch',
+                    desc: 'Ein traditionelles Ragout',
+                    votes: 24,
+                    author: 'Ungarn',
+                    image: "https://via.placeholder.com/64"
+                },
+            ];
+        </script>
+        <script src="https://unpkg.com/vue"> </script>
+        <script>
+            Vue.component('entry-component',{
+                //Optionen der neuen Vue-Instanz mit etwas weniger Attributen
+                template: '<p>Hallo, ich bin eine Komponente!</p>'
+            });
+
+            new Vue({
+                el: '#app',
+                data: {
+                    entries: entries
+                },
+                computed: {
+                    sortedEntries() {
+                        return this.entries.sort((a, b) => {
+                            return b.votes - a.votes
+                        });
+                    }
+                },
+                methods: {
+                    upvote(entryId) {
+                        const entry = this.entries.find(entry => entry.id === entryId);
+                        entry.votes++;
+                    }
                 }
-            },
-            methods: {
-                upvote(entryId){
-                    const entry = this.entries.find(entry => entry.id ===entryId);
-                    entry.votes++;
-                }
-            }
-        });
-    </script>
+
+            });
+        </script>
 </body>
 
 </html>
