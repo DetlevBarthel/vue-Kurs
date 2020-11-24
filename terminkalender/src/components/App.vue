@@ -1,8 +1,9 @@
 <template>
   <div id="app">
 
-    <CalenderWeek />
-    <div id="calender-week">
+     <CalendarWeek />
+     
+    <div id="calendar-week">
       <div class="container-fluid mt-5">
         <div class="row">
           <div class="col-12">
@@ -78,7 +79,7 @@
 
               <div class="card">
                 <div class="card-header text-center bg-vue">
-                  <strong>Sonntag</strong>
+                  <strong>Arschtag</strong>
                 </div>
                 <div class="card-body">
                   <div>1</div>
@@ -96,7 +97,7 @@
         </div>
       </div>
     </div>
-    <div id="calender-entry">
+    <div id="calendar-entry">
       <div class="container mt-5">
         <div class="row">
           <div class="col-6 offset-3">
@@ -131,18 +132,13 @@
 </template>
 
 <script>
-import CalenderWeek from "./components/CalenderWeek"
-export default {
-  name: 'App',
-  components: {
-    CalenderWeek
-  }
-}
-</script>
+import CalendarWeek from './components/CalendarWeek.vue';
 
-<script>
 export default {
   name: "App",
+  components: {
+    CalendarWeek
+  }
 };
 </script>
 <style scoped>
